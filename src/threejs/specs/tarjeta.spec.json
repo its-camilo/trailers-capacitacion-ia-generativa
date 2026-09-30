@@ -1,0 +1,33 @@
+{
+  "targetName": "Tarjeta perforada IBM (escena1, Bloque Historia)",
+  "sourceReference": "src/threejs/references/tarjeta-perforada.jpg (Wikimedia Commons, tarjeta IBM de sistema, vista frontal)",
+  "assessment": "/tmp/img2trailer/tarjeta-assessment.json (tier moderate, probe pass 1280x589)",
+  "method": "img2threejs code-only. ExtrudeGeometry con agujeros reales + canvas texture para la impresión.",
+  "layeredObservation": {
+    "macro": "Rectángulo apaisado 7.375x3.25 (ratio 2.27), cartulina manila/beige, esquina superior-izquierda cortada en diagonal.",
+    "meso": "Banda de impresión superior (campos y columnas), matriz de slots rectangulares perforados, 8 checkboxes centrales, recuadro STEMPEL abajo-izq, recuadro dirección abajo-der, pie 'IBM SYSTEEM'.",
+    "micro": "Slots de ~0.06x0.02 con esquinas redondeadas, rejilla 80 cols x 12 filas; cantos con leve bevel por desgaste.",
+    "hidden": "El reverso no se ve: se espeja el anverso sin impresión. Lado declarado, no inventado."
+  },
+  "complexity": "moderate",
+  "componentTree": {
+    "root": "Tarjetas_Root (Group, scale [1,1,1])",
+    "macro": ["Hero_Tarjeta 7.375x3.25x0.02 @ origen, esquinas r=0.12 salvo corte diagonal sup-izq (sola en escena, sin ecos)"],
+    "meso": ["~120 slots perforados reales (Shape.holes, rejilla 80x12, patrón determinista semilla 7)", "banda impresa (canvas texture 2048x896: cabeceras, checkboxes, recuadros, pie IBM)"],
+    "micro": ["bevel del extrude 0.004 (catch-light de canto)", "slots con radio 0.008"]
+  },
+  "materials": {
+    "CardStock": { "baseColor": "#D9BE8C", "roughness": 0.85, "metalness": 0, "technique": "MeshStandardMaterial + canvas map para print" },
+    "CardEdge": { "baseColor": "#C4A878", "roughness": 0.9 }
+  },
+  "topologyClass": "shape extrude (placa ornamental plana con agujeros). rationale: lámina delgada con perforaciones pasantes reales.",
+  "pivotsSockets": { "pivot": "centro de la tarjeta", "sockets": ["hero.presentacion"], "actionAnchors": [] },
+  "motion": { "presentacion": "entrada desde izq + giro Y hasta frontal + flotación ±0.06 (hero sola, sin parallax de ecos)", "camera": "órbita radius 8.5 push-in 2.4 (heredada escena1)" },
+  "detailInventory": [
+    { "id": "corte-diagonal", "mapsTo": "component.localFeatures", "desc": "chamfer sup-izq 0.45x0.45, identidad IBM" },
+    { "id": "slots-reales", "mapsTo": "component.localFeatures", "desc": "agujeros pasantes, no decal: contraluz real" },
+    { "id": "print-canvas", "mapsTo": "material.localOverrides", "desc": "texto generado en canvas, sin assets externos" }
+  ],
+  "qualityContract": { "bar": "moderate", "mustMatch": ["silueta apaisada + corte diagonal legibles", "slots como agujeros de verdad", "banda impresa creíble a 1080p"] },
+  "stylizationNote": "El patrón exacto de perforado es determinista-inventado (la foto no da la codificación); la rejilla 80x12 y el formato sí son fieles."
+}

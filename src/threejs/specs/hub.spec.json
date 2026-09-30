@@ -1,0 +1,27 @@
+{
+  "targetName": "HubMCPRAG — toro central + 7 módulos orbitando (escena4)",
+  "sourceReference": "blender/sesion-01/render_trailer.py :: escena4_hub + public/blender-renders/sesion-01/escena4_hub_0150.png",
+  "method": "img2threejs (code-only, sin Blender MCP). Toro + cilindro + 7 cubos orbitando, todo determinista.",
+  "singleViewLimits": "Vista única: la altura exacta de cada módulo se deriva de la fórmula Blender 1.6+0.5*sin(2a), no de medición.",
+  "complexity": "moderate",
+  "componentTree": {
+    "root": "Hub_Root (Group, scale [1,1,1])",
+    "macro": ["Hub_Central toro R=1.2 r=0.28 @ (0,0,1.6) metal", "Hub_Core cilindro r=0.55 h=0.7 emisivo"],
+    "meso": ["7x Modulo_{00..06} cubos 0.55 en órbita r=3.4 (pares emisivos, impares metal)"],
+    "micro": ["rotación hub 0→180°", "órbita módulos Δ=1.4 rad + bob 0.5*sin(2a)"]
+  },
+  "materials": {
+    "Hub_Metal": { "baseColor": "#141C29", "metalness": 1.0, "roughness": 0.28 },
+    "Hub_Mod": { "emissive": "#59B3FF", "emissiveIntensity": 3.5 }
+  },
+  "topologyClass": "torus (anillo) + cylinder (núcleo) + box (módulos). rationale: cada primitiva mapea 1:1 a la pieza Blender.",
+  "pivotsSockets": { "pivot": "(0,0,1.6)", "sockets": ["modulo.orbita"], "actionAnchors": ["Hub_Core"] },
+  "motion": { "giro": "hub.rotation.z 0→π", "orbita": "a→a+1.4 con bob", "camera": "radius 10 push-in 2.0" },
+  "detailInventory": [
+    { "id": "toro-7", "mapsTo": "componentTree.macro", "desc": "toro R1.2/r0.28 + core r0.55" },
+    { "id": "paridad", "mapsTo": "componentTree.meso", "desc": "módulos pares luz, impares metal" },
+    { "id": "bob", "mapsTo": "motion.orbita", "desc": "z=1.6+0.5*sin(2a)" }
+  ],
+  "qualityContract": { "bar": "moderate", "mustMatch": ["anillo + núcleo legibles", "7 módulos en órbita", "alternancia luz/metal"] },
+  "whySharperThanBlender": "Geometría vectorial sin samples: bordes del toro y módulos nítidos a cualquier resolución, sin ruido de Cycles."
+}

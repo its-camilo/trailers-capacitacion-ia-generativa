@@ -1,0 +1,10 @@
+node_modules/
+out/
+renders/
+*.mp4
+*.webm
+.DS_Store
+public/blender-renders/sesion-01/*.png
+public/blender-renders/sesion-01/*.mp4
+!public/blender-renders/sesion-01/.gitkeep
+!public/audio/.gitkeep

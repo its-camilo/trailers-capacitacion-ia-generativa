@@ -1,0 +1,36 @@
+{
+  "targetName": "Portátil de agente (escena2, Bloque Agente)",
+  "sourceReference": "sin foto: objeto genérico de trabajo (intake por descripción). Estilo cartoon-Keynote claro a juego con el tráiler.",
+  "assessment": "tier moderate — manufactura + repetición (teclado instanciado) + canvas texture (pantalla)",
+  "method": "img2threejs code-only. Cajas + cilindro (bisagra) + InstancedMesh (70 teclas) + canvas texture (editor con prompt) + emisivos (logo, cursor, glow).",
+  "layeredObservation": {
+    "macro": "Portátil abierto en L: base apaisada 6.4x4.2 + pantalla 6.4x4.3 inclinada ~12° hacia atrás, bisagra trasera.",
+    "meso": "Teclado 5x14 + spacebar al fondo de la base, trackpad centrado adelante; pantalla con marco negro, display con editor, webcam arriba, logo emisivo atrás.",
+    "micro": "Patas, puertos laterales, cursor parpadeante sobre el prompt, resplandor azul de pantalla.",
+    "hidden": "Trasera de la base y parte posterior de la tapa: aluminio liso inferido. Declarado."
+  },
+  "complexity": "moderate",
+  "componentTree": {
+    "root": "Portatil_Root (Group, scale [1,1,1], pos [0,0,0])",
+    "macro": ["Base 6.4x0.22x4.2 aluminio (cara sup en y=0)", "Pantalla (grupo @ bisagra, rot.x -0.21): lid 6.4x4.3x0.16 + marco + display 5.9x3.7", "Bisagra: cilindro r=0.14 l=5.4 (eje X)"],
+    "meso": ["Teclado: InstancedMesh 70 teclas 0.36 + spacebar 2.6", "Trackpad 1.9x1.15", "Display: canvas editor (topbar + sidebar + 12 líneas + prompt)", "Logo emisivo + webcam + cursor"],
+    "micro": ["4 patas + 2 puertos", "cursor/glow/logo fijos (sin parpadeo)", "flotación y ±0.06 + yaw Y contemplativo"]
+  },
+  "materials": {
+    "Aluminio": { "baseColor": "#C9CFD6", "roughness": 0.35, "metalness": 0.9 },
+    "Tecla": { "baseColor": "#1A1E26", "roughness": 0.5, "metalness": 0.2 },
+    "MarcoNegro": { "baseColor": "#0A0C10", "roughness": 0.45, "metalness": 0.3 },
+    "Display": { "technique": "MeshBasicMaterial + canvas texture (editor procedural)" },
+    "LogoGlow": { "emissive": "#2E9BFF", "emissiveIntensity": 3.0 }
+  },
+  "topologyClass": "box (chasis/pantalla/teclas) + cylinder (bisagra/patas) + instanced mesh (teclado). rationale: manufactura + repetición.",
+  "pivotsSockets": { "pivot": "centro de la base", "sockets": ["portatil.tecleo", "pantalla.pulso"], "actionAnchors": ["Cursor", "Logo"] },
+  "motion": { "presentacion": "respiración 1±0.012 + yaw Y ±0.28 + flotación y ±0.06", "pantalla": "cursor, glow y logo fijos sin parpadeo", "camera": "órbita radius 10.5 push-in 1.5 frontal-arriba (propia escena2, target [0,1,0])" },
+  "detailInventory": [
+    { "id": "teclas-70", "mapsTo": "component.localFeatures", "desc": "5x14 instanciadas paso 0.44 + spacebar" },
+    { "id": "editor-canvas", "mapsTo": "material.localOverrides", "desc": "topbar/sidebar/código/prompt con semilla 11" },
+    { "id": "pantalla-fija", "mapsTo": "component.localFeatures", "desc": "cursor + glow + logo constantes, sin parpadeo" }
+  ],
+  "qualityContract": { "bar": "moderate", "mustMatch": ["portátil abierto legible", "teclado + trackpad visibles", "pantalla con editor y prompt"] },
+  "stylizationNote": "Genérico sin marca: sin logos reales, sticker neutro. Una sola vista frontal: trasera inferida."
+}

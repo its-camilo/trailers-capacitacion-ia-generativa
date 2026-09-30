@@ -1,0 +1,37 @@
+{
+  "targetName": "Cerebro humano vista lateral (escena2, Bloque Agente) — v2 cartoon",
+  "sourceReference": "cerebro.jpg raíz (2816x1536, cartoon rosado outline granate, probe pass) — copia de trabajo en src/threejs/references/cerebro.jpg",
+  "assessment": "/tmp/cerebro-v2-assessment.json (tier complex)",
+  "method": "img2threejs code-only. Esfera desplazada 3 octavas (gyri anchos cartoon) + 9 surcos/tubo por lado + outline toon inverted-hull + cerebelo con 7 estrías tubo + tronco.",
+  "layeredObservation": {
+    "macro": "Ovoide apaisado ~1.6:1 (frontal izq redondeado, occipital der redondeado), domo superior continuo, temporal en banda horizontal prominente abajo-centro.",
+    "meso": "Gyri anchos cartoon: surco central en S vertical media, fisura lateral larga arqueada sobre el temporal, 2 gyri temporales horizontales, 2 frontales, 1 occipital, 1 parietal. Outline granate grueso continuo.",
+    "micro": "Corteza rosa #E9AAB8 con highlight #F7D0D8 en lomos, surcos/outline #7A2E4E; cerebelo #D894A4 con 7 estrías finas horizontales; tronco #DE97A6 cónico corto.",
+    "hidden": "Hemisferio derecho, cara medial, interior: no visibles. Simetría especular declarada; mapeo cortical exacto fuera de alcance (stylized cartoon, single-view)."
+  },
+  "complexity": "complex",
+  "componentTree": {
+    "root": "Cerebro_Root (Group, scale [1,1,1])",
+    "macro": ["Cerebro_Hemisferio izq: esfera 128x80 escalada (1.85, 1.15, 1.4) + displacement 3 octavas cartoon", "Cerebro_Hemisferio der espejado + outlines toon BackSide 3.5% (confianza media, declarado)"],
+    "meso": ["9 Surcos por lado (Central r.055, Lateral r.06, 7 secundarios r.032-.038) tubos granate empotrados", "Cerebelo: esfera (0.66,0.5,0.62) @ postero-inferior + outline + 7 estrías tubo", "Tronco: cilindro cónico (0.12→0.19, h 0.62) + outline"],
+    "micro": ["vertex colors 3 paradas (low #D98CA0 → mid #E9AAB8 → high #F7D0D8) desde displacement", "respiración 1.0→1.015 + rotación lenta Y contemplativa"]
+  },
+  "materials": {
+    "Cortex": { "baseColor": "#E9AAB8", "highlight": "#F7D0D8", "shadow": "#D98CA0", "roughness": 0.5, "metalness": 0, "technique": "MeshStandardMaterial + vertexColors" },
+    "SulcusOutline": { "baseColor": "#7A2E4E", "roughness": 0.65, "technique": "MeshStandardMaterial tubos + MeshBasicMaterial BackSide outlines" },
+    "Cerebellum": { "baseColor": "#D894A4", "roughness": 0.6 },
+    "Tronco": { "baseColor": "#DE97A6", "roughness": 0.6 }
+  },
+  "topologyClass": "sphere/ellipsoid con displacement (forma orgánica continua). rationale: nunca box; el volumen es un único cuerpo blando cartoon.",
+  "pivotsSockets": { "pivot": "centro del ovoide (0,0,1.6)", "sockets": ["cerebro.respiracion"], "actionAnchors": [] },
+  "motion": { "respiracion": "scale 1±0.015 + giro Y contemplativo (no órbita de partículas)", "camera": "órbita radius 11 push-in 2.0 (heredada escena2, sin cambios)" },
+  "detailInventory": [
+    { "id": "gyri-3oct", "mapsTo": "component.localFeatures", "desc": "3 octavas cartoon (0.068/0.03/0.012) + máscara domo, temporal en banda" },
+    { "id": "surcos-9", "mapsTo": "component.localFeatures", "desc": "9 trazos por lado con radios diferenciados, empotrados -0.015" },
+    { "id": "outline-toon", "mapsTo": "material.localOverrides", "desc": "inverted-hull BackSide 3.5% hemisferios, 5% cerebelo, 12% tronco" },
+    { "id": "estrias-cerebelo", "mapsTo": "component.localFeatures", "desc": "7 arcos tubo r.018 horizontales sobre cerebelo" },
+    { "id": "vertex-3stop", "mapsTo": "material.localOverrides", "desc": "gradiente low/mid/high desde displacement" }
+  ],
+  "qualityContract": { "bar": "complex-stylized", "mustMatch": ["ovoide lateral cartoon con temporal en banda", "9 surcos legibles central + lateral larga", "outline granate continuo", "cerebelo estriado + tronco presentes"] },
+  "stylizationNote": "Cartoon estilizado a partir de una sola vista 2816px: giros sugeridos por ruido+9 tubos, no mapeo cortical real. Lados ocultos espejados — se declara."
+}

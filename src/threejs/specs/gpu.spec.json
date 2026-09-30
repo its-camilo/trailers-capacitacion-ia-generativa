@@ -1,0 +1,38 @@
+{
+  "targetName": "GPU doble ventilador (escena3, Bloque Transformer)",
+  "sourceReference": "src/threejs/references/gpu.jpg (Inno3D GTX 1050 TwinX2 frontal, 1280x787, probe pass)",
+  "assessment": "/tmp/img2trailer/gpu-assessment.json (tier moderate)",
+  "method": "img2threejs code-only. Cajas + cilindros + InstancedMesh (aspas, aletas, pines) + canvas textures (stickers, bracket).",
+  "layeredObservation": {
+    "macro": "Rectángulo apaisado ~2:1, shroud negro de facetas angulares, dos ventiladores circulares dominantes, bracket metálico a la izq, conector PCIe dorado abajo.",
+    "meso": "Fan: hub central con sticker a rayas + 9 aspas translúcidas oscuras curvadas; aletas plateadas del disipador entre/tras los fans; sarjetas del shroud con bordes biselados; tira LED de estado.",
+    "micro": "Tornillos del shroud, slits del bracket, dientes del conector dorado (fino, instanciado), texto del sticker (canvas).",
+    "hidden": "Backplate trasero y PCB: inferidos (plano oscuro + refuerzo). Declarado."
+  },
+  "complexity": "moderate",
+  "componentTree": {
+    "root": "Gpu_Root (Group, scale [1,1,1])",
+    "macro": ["PCB 6.4x0.18x2.6", "Shroud: 5 piezas angulares (cajas rotadas, bisel visual por solape)", "Bracket metal izq con slits"],
+    "meso": ["Fan_L/Fan_R @ x=∓1.55: anillo + hub r=0.42 + 9 aspas (InstancedMesh, barrido 35°) + sticker canvas", "Heatsink: 2x28 aletas plateadas instanciadas tras fans", "PCIe: 36 pines dorados instanciados abajo", "LED strip emisivo superior"],
+    "micro": ["6 tornillos (cilindros r=0.05)", "bracket slits (3 ranuras oscuras)", "giro fans ±0.35 rad/frame contrarrotantes"]
+  },
+  "materials": {
+    "ShroudBlack": { "baseColor": "#15181D", "roughness": 0.5, "metalness": 0.3 },
+    "FanBlade": { "baseColor": "#23262B", "roughness": 0.35, "transparent": true, "opacity": 0.92 },
+    "HeatsinkSilver": { "baseColor": "#C9CFD6", "roughness": 0.35, "metalness": 1.0 },
+    "PcieGold": { "baseColor": "#D8A93B", "roughness": 0.3, "metalness": 1.0 },
+    "BracketSteel": { "baseColor": "#9AA0A8", "roughness": 0.4, "metalness": 1.0 },
+    "LedStrip": { "emissive": "#2E9BFF", "emissiveIntensity": 4.0 }
+  },
+  "topologyClass": "box (shroud/PCB) + cylinder (hub/anillo) + instanced mesh (aspas, aletas, pines, tornillos). rationale: manufactura + repetición.",
+  "pivotsSockets": { "pivot": "centro de la tarjeta", "sockets": ["fan_L.spin", "fan_R.spin"], "actionAnchors": ["LedStrip"] },
+  "motion": { "fans": "contrarrotación continua determinista por frame", "presentacion": "tilt Y ±0.12 + flotación", "camera": "órbita radius 11 push-in 3.0 (heredada escena3)" },
+  "detailInventory": [
+    { "id": "aspas-9", "mapsTo": "component.localFeatures", "desc": "9 aspas/fan, pitch 35°, largo 0.33 (mitad), curvatura por rotación de pala" },
+    { "id": "aletas-56", "mapsTo": "component.localFeatures", "desc": "2 bloques x 28 aletas de 0.03" },
+    { "id": "pines-36", "mapsTo": "component.localFeatures", "desc": "peine dorado inferior" },
+    { "id": "sticker", "mapsTo": "material.localOverrides", "desc": "canvas: rayas + texto generico" }
+  ],
+  "qualityContract": { "bar": "moderate", "mustMatch": ["doble fan legible con stickers", "disipador plateado entre fans", "conector dorado + bracket"] },
+  "stylizationNote": "Modelo genérico inspirado en la referencia (no réplica de marca): sticker con texto neutro."
+}

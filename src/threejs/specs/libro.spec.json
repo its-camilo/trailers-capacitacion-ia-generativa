@@ -1,0 +1,34 @@
+{
+  "targetName": "Libro abierto (escena4, Bloque MCP/RAG)",
+  "sourceReference": "sin foto: objeto genérico (intake por descripción). Metáfora de contexto ilimitado: el conocimiento abierto.",
+  "assessment": "tier moderate — manufactura simple + canvas textures (páginas con texto)",
+  "method": "img2threejs code-only. Cajas (tapas, páginas) + cilindro (lomo) + planos con canvas texture (texto procedural).",
+  "layeredObservation": {
+    "macro": "Libro abierto en V suave: dos tapas azul profundo 3.2x4.5 + bloques de páginas crema, lomo central.",
+    "meso": "Hojas superiores con encabezados (SIN LÍMITES / CONTEXTO TOTAL) + líneas de texto + bloque destacado; marcapáginas rojo al frente.",
+    "micro": "Caída de tapas ±0.09 rad, flotación y ±0.08 + yaw ±0.22.",
+    "hidden": "Contratapa y base: tapas lisas inferidas. Declarado."
+  },
+  "complexity": "moderate",
+  "componentTree": {
+    "root": "Libro_Root (Group, scale [1,1,1], pos [0,0.4,0])",
+    "macro": ["Tapa_Izq/Der 3.2x0.1x4.5 azul", "Paginas_Izq/Der 2.9x0.3x4.2 crema", "Lomo: cilindro r=0.16 l=4.5"],
+    "meso": ["Hoja_Izq/Der: planos 2.9x4.2 con canvas (encabezado + 22 líneas + destacado)", "Marcapaginas rojo 0.35x1.4 al frente"],
+    "micro": ["respiración 1±0.012 + yaw ±0.22 + flotación"]
+  },
+  "materials": {
+    "TapaAzul": { "baseColor": "#16305C", "roughness": 0.45, "metalness": 0.15 },
+    "PaginaCrema": { "baseColor": "#F1E9D4", "roughness": 0.9 },
+    "HojaTexto": { "technique": "MeshStandardMaterial + canvas texture (texto procedural)" },
+    "CintaRoja": { "baseColor": "#D64545", "roughness": 0.6 }
+  },
+  "topologyClass": "box (tapas/páginas) + cylinder (lomo) + plane (hojas). rationale: manufactura editorial.",
+  "pivotsSockets": { "pivot": "lomo central", "sockets": ["libro.apertura"], "actionAnchors": ["Marcapaginas"] },
+  "motion": { "presentacion": "respiración + yaw ±0.22 + flotación", "camera": "órbita frontal-arriba (propia escena4, target [0,0.6,0])" },
+  "detailInventory": [
+    { "id": "hojas-texto", "mapsTo": "material.localOverrides", "desc": "2 canvas: encabezado + líneas + bloque destacado" },
+    { "id": "tapas-caida", "mapsTo": "component.localFeatures", "desc": "tapas rotadas ±0.09 abriendo en V" }
+  ],
+  "qualityContract": { "bar": "moderate", "mustMatch": ["libro abierto legible", "texto procedural en ambas hojas", "lomo + marcapáginas visibles"] },
+  "stylizationNote": "Genérico sin marca ni texto real: líneas abstractas + dos encabezados."
+}
