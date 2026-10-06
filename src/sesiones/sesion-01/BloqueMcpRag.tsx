@@ -71,7 +71,7 @@ export const BloqueMcpRag: React.FC = () => {
           </div>
         </div>
 
-        <KineticText fontSize={26} delay={120} color="#5A6B8C" fontWeight={500} style={{marginTop: 32, padding: '12px 30px'}}>
+        <KineticText fontSize={26} delay={120} color="#000000" fontWeight={700} style={{marginTop: 32, padding: '12px 30px'}}>
           {fase === 0 ? 'Model Context Protocol → herramientas reales' : 'Embeddings → búsqueda semántica → contexto'}
         </KineticText>
       </AbsoluteFill>

@@ -54,7 +54,7 @@ export const BloqueHistoria: React.FC = () => {
             <LightSweep delay={230} />
           </div>
         )}
-        <KineticText fontSize={30} delay={300} color="#5A6B8C" fontWeight={500} style={{marginTop: 26, padding: '10px 28px'}}>
+        <KineticText fontSize={30} delay={300} color="#000000" fontWeight={700} style={{marginTop: 26, padding: '10px 28px'}}>
           De C++ a Prompting
         </KineticText>
       </AbsoluteFill>

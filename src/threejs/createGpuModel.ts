@@ -209,7 +209,8 @@ export function createGpuModel(
     // fans contrarrotantes, velocidad constante determinista por frame
     spinners[0].rotation.z = frame * 0.28;
     spinners[1].rotation.z = -frame * 0.28;
-    root.rotation.y = 0.12 * Math.sin(t * Math.PI * 2);
+    // vuelta completa 360° durante el bloque
+    root.rotation.y = t * Math.PI * 2;
     root.position.y = 0.1 * Math.sin(t * Math.PI * 3);
   };
 

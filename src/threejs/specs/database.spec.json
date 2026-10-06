@@ -1,0 +1,1 @@
+{"geometry": "cilindro DB 3 discos + boca emisiva + 3 tablas flotantes Northwind, vuelta 360 eje Y, sin particulas", "identity": ["cilindro clasico DB", "tablas Customers/Orders/Products"], "materials": ["acero metalness .9", "emisivo azul"], "singleViewLimits": "interior cilindro no visible, tapas inferidas", "sockets": ["db.northwind", "db.query"]}

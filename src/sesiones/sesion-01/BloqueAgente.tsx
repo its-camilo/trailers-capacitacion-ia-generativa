@@ -59,7 +59,7 @@ export const BloqueAgente: React.FC = () => {
           })}
         </div>
 
-        <KineticText fontSize={34} delay={180} color="#5A6B8C" fontWeight={500} style={{marginTop: 28, padding: '12px 32px'}}>
+        <KineticText fontSize={34} delay={180} color="#000000" fontWeight={700} style={{marginTop: 28, padding: '12px 32px'}}>
           El agente es el trabajador. El Harness es la ciudad.
         </KineticText>
       </AbsoluteFill>

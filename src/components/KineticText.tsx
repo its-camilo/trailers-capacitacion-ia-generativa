@@ -22,7 +22,7 @@ type Props = {
 
 /**
  * Borde de contraste según luminancia del color:
- * texto oscuro → borde blanco, texto claro → borde negro.
+ * texto oscuro y gris medio → borde blanco, texto claro → borde negro.
  * Devuelve el valor para `WebkitTextStroke` o undefined si no aplica.
  */
 export function contrastStroke(color: string, fontSize: number): string | undefined {
@@ -34,9 +34,9 @@ export function contrastStroke(color: string, fontSize: number): string | undefi
   const b = parseInt(full.slice(4, 6), 16) / 255;
   const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
   const w = Math.max(1, Math.min(4, Math.round(fontSize / 60)));
-  if (lum < 0.4) return `${w}px #FFFFFF`;
+  if (lum < 0.6) return `${w}px #FFFFFF`;
   if (lum > 0.75) return `${w}px #000000`;
-  return undefined;
+  return `${w}px #FFFFFF`;
 }
 
 /**

@@ -1,0 +1,1 @@
+{"geometry": "3 racks + frontales LED procedurales + hoja Doc informe flotante + tubo sync + 30 particulas", "identity": ["racks datacenter", "LEDs verdes/azules", "hoja INFORME NORTHWIND", "arco sync"], "materials": ["metal oscuro", "emisivo azul/verde", "papel blanco"], "singleViewLimits": "trasera racks inferida", "sockets": ["docs.informe", "drive.sync"]}

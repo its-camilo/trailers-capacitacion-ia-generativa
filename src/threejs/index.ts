@@ -4,3 +4,6 @@ export {createPortatilModel} from './createPortatilModel';
 export {createLibroModel} from './createLibroModel';
 export {createGpuModel} from './createGpuModel';
 export {createHubModel} from './createHubModel';
+export {createRobotsModel} from './createRobotsModel';
+export {createDatabaseModel} from './createDatabaseModel';
+export {createDatacenterModel} from './createDatacenterModel';

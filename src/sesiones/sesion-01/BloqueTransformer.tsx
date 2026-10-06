@@ -5,12 +5,9 @@ import {ThreeSceneLayer} from '../../components/ThreeSceneLayer';
 import {createGpuModel} from '../../threejs/createGpuModel';
 import {FPS} from '../../constants';
 
-/** Bloque 3 (18-28s): La Revolución del Transformer. Corte glitch al ritmo. */
+/** Bloque 3 (18-28s): La Revolución del Transformer. */
 export const BloqueTransformer: React.FC = () => {
   const frame = useCurrentFrame();
-  // glitch: cortes de 3 frames cada ~50 frames
-  const glitch = frame % 50 < 3 ? (frame % 50 === 0 ? -14 : 12) : 0;
-  const glitchOp = frame % 50 < 3 ? 0.85 : 1;
 
   const tokens = ['query', 'atención', 'Q·K·V', 'softmax', 'paralelo', 'tokens'];
 
@@ -53,8 +50,7 @@ export const BloqueTransformer: React.FC = () => {
         style={{
           justifyContent: 'center',
           alignItems: 'center',
-          transform: `translateX(${glitch}px)`,
-          opacity: glitchOp,
+          opacity: 1,
           padding: '40px 230px',
           gap: 26,
         }}
@@ -66,19 +62,11 @@ export const BloqueTransformer: React.FC = () => {
         <KineticText fontSize={76} delay={50} style={{padding: '12px 24px'}}>
           PROCESAMIENTO PARALELO
         </KineticText>
-        <KineticText fontSize={32} delay={130} color="#5A6B8C" fontWeight={500} style={{marginTop: 30, padding: '12px 32px'}}>
+        <KineticText fontSize={32} delay={130} color="#000000" fontWeight={700} style={{marginTop: 30, padding: '12px 32px'}}>
           Procesamiento en paralelo / Búsqueda por clave-valor
         </KineticText>
       </AbsoluteFill>
 
-      {/* barras glitch RGB */}
-      {glitch !== 0 && (
-        <AbsoluteFill
-          style={{
-            background: `linear-gradient(90deg, transparent 40%, rgba(255,0,90,0.12) 45%, rgba(0,255,255,0.12) 55%, transparent 60%)`,
-          }}
-        />
-      )}
       {/* línea de progreso del bloque */}
       <AbsoluteFill style={{justifyContent: 'flex-end', padding: '40px 150px'}}>
         <div style={{height: 4, background: 'rgba(10,22,40,0.12)', borderRadius: 4}}>

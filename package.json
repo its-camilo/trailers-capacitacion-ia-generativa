@@ -10,8 +10,13 @@
     "render:sesion01-webm": "remotion render TrailerSesion01 out/sesion-01-fundamentos.webm --codec vp9",
     "still:sesion01": "remotion still TrailerSesion01 out/still-01.png --frame 300",
     "still:3d": "remotion still TrailerSesion01 out/check3d-700.png --frame=700",
+    "render:sesion02": "remotion render TrailerSesion02 out/sesion-02-practica-mcp.mp4 --codec h264 --crf 18",
+    "still:sesion02": "remotion still TrailerSesion02 out/still-02.png --frame 300",
+    "still:sesion02-robots": "remotion still TrailerSesion02 out/check02-robots.png --frame=700",
+    "still:sesion02-db": "remotion still TrailerSesion02 out/check02-db.png --frame=1300",
+    "still:sesion02-dc": "remotion still TrailerSesion02 out/check02-dc.png --frame=1900",
     "lint": "tsc --noEmit",
-    "threejs:check": "tsc --noEmit && echo '[OK] 6 factories img2threejs compilan'"
+    "threejs:check": "tsc --noEmit && echo '[OK] 9 factories img2threejs compilan'"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.422",

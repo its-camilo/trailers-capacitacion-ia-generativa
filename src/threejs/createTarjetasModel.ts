@@ -162,10 +162,10 @@ export function createTarjetasModel(
 
   const updateFrame = (frame: number, _fps: number, dur: number) => {
     const t = bezierEase(dur <= 1 ? 0 : frame / (dur - 1));
-    // entrada rápida (primer tercio) + showcase centrado con sway
+    // entrada rápida (primer tercio) + vuelta completa 360° durante el showcase
     const te = bezierEase(Math.min(1, t * 3.0));
     hero.position.x = -9 + 9 * te + 0.3 * Math.sin(t * Math.PI * 2) * te;
-    hero.rotation.y = -0.9 * (1 - te) + 0.15 * Math.sin(t * Math.PI * 4) * te;
+    hero.rotation.y = -0.9 * (1 - te) + t * Math.PI * 2;
     hero.position.z = 0.1 * Math.sin(t * Math.PI);
     hero.position.y = 0.08 * Math.sin(t * Math.PI * 3);
   };
